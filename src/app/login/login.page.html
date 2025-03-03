@@ -1,0 +1,29 @@
+<!-- filepath: /c:/Users/mast3/Desktop/proyecto/turistas/src/app/login/login.page.html -->
+<ion-content class="main" [fullscreen]="true">
+  <ion-grid class="h-100">
+    <ion-row class="h-100 ion-align-items-center ion-justify-content-center">
+      <ion-col size-xs="12" size-sm="8" size-md="6" size-lg="4">
+        <ion-card>
+          <div class="image-container">
+            <ion-img
+              src="https://plus.unsplash.com/premium_photo-1661892088256-0a17130b3d0d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVycml0b3xlbnwwfHwwfHx8MA%3D%3D"
+              alt="The Wisconsin State Capitol building in Madison, WI at night"
+            ></ion-img>
+          </div>
+          
+          <ion-card-header>
+            <ion-card-title>Login</ion-card-title>
+          </ion-card-header>
+          
+          <h3 class="correo">Correo:</h3>
+          <ion-input [(ngModel)]="nombre" label="algo@gmail.com" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+
+          <h3 class="contra">Contraseña:</h3>
+          <ion-input [(ngModel)]="contrasena" label="********" label-placement="floating" fill="outline" placeholder="Enter text" type="password"></ion-input>
+            
+          <ion-button (click)="login()" expand="block">Iniciar sesión</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

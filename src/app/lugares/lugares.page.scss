@@ -1,0 +1,63 @@
+/* filepath: /c:/Users/mast3/Desktop/proyecto/turistas/src/app/lugares/lugares.page.scss */
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.custom-card {
+  --background: rgba(188, 20, 20, 0); /* Fondo transparente para verificar */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.boton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ajusta la distribución del contenido */
+  height: 100px; /* Ajusta la altura según sea necesario */
+  width: 100%; /* Asegura que el botón ocupe todo el ancho del card */
+  --padding-start: 10px; /* Ajusta el padding según sea necesario */
+  background-color: rgb(240, 240, 240); /* Coincide con el fondo de la tarjeta */
+  border: none; /* Elimina el borde */
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  padding: 0; /* Elimina el padding */
+  margin: 0; /* Elimina el margen */
+}
+
+.boton:hover {
+  background-color: #e9ecef;
+}
+
+.button-image {
+  width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 70px; /* Ajusta el tamaño de la imagen según sea necesario */
+  margin-left: 10px; /* Espacio entre el texto y la imagen */
+  border-radius: 5%; /* Ajusta el radio de la imagen */
+  overflow: hidden;
+  object-fit: cover; /* Asegura que la imagen se ajuste correctamente */
+}
+
+.menuboton {
+  --background: transparent; /* Fondo transparente */
+  --border-width: 0; /* Sin borde */
+  --padding-start: 0; /* Sin padding al inicio */
+  --padding-end: 0; /* Sin padding al final */
+  --inner-padding: 0; /* Sin padding interno */
+  --min-height: 0; /* Sin altura mínima */
+  --ion-item-background: transparent; /* Fondo transparente */
+  --ion-item-border-color: transparent; /* Borde transparente */
+  --ion-item-border-width: 0; /* Sin borde */
+  --ion-item-padding: 0; /* Sin padding */
+  --ion-item-margin: 0; /* Sin margen */
+  color: red; /* Heredar color del texto */
+  
+}
+
