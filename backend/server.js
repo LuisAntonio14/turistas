@@ -2,30 +2,25 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config(); // Cargar variables de entorno desde .env
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Habilitar CORS para permitir solicitudes desde cualquier origen
 app.use(cors({
-  origin: '*', // Esto permitirá solicitudes desde cualquier origen
+  origin: '*', // Permitir peticiones desde la app Ionic
 }));
 
 app.use(bodyParser.json());
 
-// Conectar a MongoDB
-mongoose.connect('mongodb://localhost:27017/turistas', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// 🔹 Conectar a MongoDB Atlas usando la variable de entorno
+const mongoURI = process.env.MONGO_URI; 
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('✅ Conectado a MongoDB Atlas'))
+  .catch(err => console.error('❌ Error de conexión:', err));
 
-// Definir el esquema y el modelo de usuario
+// 🔹 Definir el esquema y modelo de usuario
 const usuarioSchema = new mongoose.Schema({
   nombre: String,
   contrasena: String,
@@ -33,23 +28,23 @@ const usuarioSchema = new mongoose.Schema({
 
 const Usuario = mongoose.model('Usuario', usuarioSchema, 'usuario');
 
-// Ruta para el inicio de sesión
+// 🔹 Ruta para el inicio de sesión
 app.post('/login', async (req, res) => {
-  const { nombre, contrasena } = req.body;
-  console.log(`Intento de login - Nombre: ${nombre}, Contraseña: ${contrasena}`);
+  try {
+    const { nombre, contrasena } = req.body;
+    const user = await Usuario.findOne({ nombre, contrasena });
 
-  const user = await Usuario.findOne({ nombre, contrasena });
-
-  if (user) {
-    console.log('Login exitoso');
-    res.status(200).send({ message: 'Login successful' });
-  } else {
-    console.log('Credenciales inválidas');
-    res.status(401).send({ message: 'Invalid credentials' });
+    if (user) {
+      res.status(200).send({ message: 'Login exitoso' });
+    } else {
+      res.status(401).send({ message: 'Credenciales inválidas' });
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Error en el servidor', error });
   }
 });
 
-// Iniciar el servidor en 0.0.0.0 para aceptar conexiones externas
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on http://0.0.0.0:${port}`);
+// 🔹 Iniciar el servidor
+app.listen(port, () => {
+  console.log(`🚀 Servidor corriendo en el puerto ${port}`);
 });
