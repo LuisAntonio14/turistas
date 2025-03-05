@@ -3,3 +3,4 @@ flask-mongoengine==1.0.0
 Werkzeug==2.0.2
 flask-cors
 dnspython
+gunicorn==23.0.0
