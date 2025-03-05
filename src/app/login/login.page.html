@@ -6,20 +6,20 @@
         <ion-card>
           <div class="image-container">
             <ion-img
-              src="https://plus.unsplash.com/premium_photo-1661892088256-0a17130b3d0d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVycml0b3xlbnwwfHwwfHx8MA%3D%3D"
-              alt="The Wisconsin State Capitol building in Madison, WI at night"
+              src="../assets/images/logo.png"
+              
             ></ion-img>
           </div>
           
           <ion-card-header>
-            <ion-card-title>Login</ion-card-title>
+            <ion-card-title></ion-card-title>
           </ion-card-header>
           
           <h3 class="correo">Correo:</h3>
-          <ion-input [(ngModel)]="nombre" label="algo@gmail.com" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+          <ion-input [(ngModel)]="nombre" label=""  fill="outline" placeholder=""></ion-input>
 
           <h3 class="contra">Contraseña:</h3>
-          <ion-input [(ngModel)]="contrasena" label="********" label-placement="floating" fill="outline" placeholder="Enter text" type="password"></ion-input>
+          <ion-input [(ngModel)]="contrasena" label="" label-placement="floating" fill="outline" placeholder="Enter text" type="password"></ion-input>
             
           <ion-button (click)="login()" expand="block">Iniciar sesión</ion-button>
         </ion-card>

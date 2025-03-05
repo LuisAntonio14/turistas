@@ -1,4 +1,7 @@
-/* filepath: /c:/Users/mast3/Desktop/proyecto/turistas/src/app/lugares/lugares.page.scss */
+body {
+  --background-color: #ffffff; /* Fondo completamente blanco */
+}
+
 ion-content {
   display: flex;
   justify-content: center;
@@ -6,10 +9,11 @@ ion-content {
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
+  --ion-background-color: #ffffff; /* Asegura el fondo blanco en ion-content */
 }
 
 .custom-card {
-  --background: rgba(188, 20, 20, 0); /* Fondo transparente para verificar */
+  --background: rgba(255, 255, 255, 1); /* Fondo blanco para las tarjetas */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -19,45 +23,55 @@ ion-content {
 .boton {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ajusta la distribución del contenido */
-  height: 100px; /* Ajusta la altura según sea necesario */
-  width: 100%; /* Asegura que el botón ocupe todo el ancho del card */
-  --padding-start: 10px; /* Ajusta el padding según sea necesario */
-  background-color: rgb(240, 240, 240); /* Coincide con el fondo de la tarjeta */
-  border: none; /* Elimina el borde */
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-  padding: 0; /* Elimina el padding */
-  margin: 0; /* Elimina el margen */
+  justify-content: space-between; /* Asegura que el contenido esté separado */
+  height: 100px;
+  width: 100%;
+  background: transparent !important; /* Sin fondo */
+  color: black !important; /* Texto en negro */
+  font-weight: bold; /* Hace que los nombres resalten */
+  border: none !important; /* Sin bordes */
+  box-shadow: none !important; /* Sin sombras */
+  padding: 0;
+  margin: 0;
+  text-transform: capitalize; /* Primera letra en mayúscula */
+}
+
+.boton::part(native) {
+  background: transparent !important; /* Asegura que no tenga color */
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .boton:hover {
-  background-color: #e9ecef;
+  background-color: transparent !important; /* Mantiene el fondo transparente */
+}
+
+.boton-content {
+  display: flex;
+  justify-content: space-between; /* Asegura que el texto esté a la izquierda y la imagen a la derecha */
+  align-items: center; /* Centra verticalmente el contenido */
+  width: 100%;
 }
 
 .button-image {
-  width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
-  height: 70px; /* Ajusta el tamaño de la imagen según sea necesario */
-  margin-left: 10px; /* Espacio entre el texto y la imagen */
-  border-radius: 5%; /* Ajusta el radio de la imagen */
+  width: 70px; /* Tamaño reducido para que se vea bien en círculo */
+  height: 70px;
+  border-radius: 50%; /* Hace que las imágenes sean circulares */
   overflow: hidden;
-  object-fit: cover; /* Asegura que la imagen se ajuste correctamente */
+  object-fit: cover;
+  margin-left: 10px; /* Deja espacio entre el texto y la imagen */
 }
 
 .menuboton {
-  --background: transparent; /* Fondo transparente */
-  --border-width: 0; /* Sin borde */
-  --padding-start: 0; /* Sin padding al inicio */
-  --padding-end: 0; /* Sin padding al final */
-  --inner-padding: 0; /* Sin padding interno */
-  --min-height: 0; /* Sin altura mínima */
-  --ion-item-background: transparent; /* Fondo transparente */
-  --ion-item-border-color: transparent; /* Borde transparente */
-  --ion-item-border-width: 0; /* Sin borde */
-  --ion-item-padding: 0; /* Sin padding */
-  --ion-item-margin: 0; /* Sin margen */
-  color: red; /* Heredar color del texto */
-  
+  --background: transparent;
+  --border-width: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding: 0;
+  --min-height: 0;
+  --ion-item-background: transparent;
+  --ion-item-border-color: transparent;
+  --ion-item-border-width: 0;
+  --ion-item-padding: 0;
+  --ion-item-margin: 0;
 }
-
