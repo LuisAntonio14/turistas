@@ -16,27 +16,24 @@ export class LoginPage implements OnInit {
   nombre: string = '';
   contrasena: string = '';
 
-  // Cambia localhost por la IP de tu PC en la red local
-  private API_URL = 'http://192.168.120.185:5000'; // Cambia esta IP por la IP de tu PC
+  constructor(private router: Router, private http: HttpClient) { } // Inyectar HttpClient
 
-  constructor(private router: Router, private http: HttpClient) { }
-
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   irALugares() {
     this.router.navigate(['lugares']);  // Redirigir a la página de lugares
   }
 
   login() {
-    console.log("Datos enviados:", { nombre: this.nombre, contrasena: this.contrasena });
-
-    this.http.post(`${this.API_URL}/login`, { nombre: this.nombre, contrasena: this.contrasena })
+    this.http.post('http://localhost:5000/login', { nombre: this.nombre, contrasena: this.contrasena })
       .subscribe(response => {
         console.log(response);
         this.irALugares();
       }, error => {
-        console.error("Error en login:", error);
-        alert('Credenciales inválidas');
+        console.error(error);
+        alert('Invalid credentials');
       });
   }
+  
 }
