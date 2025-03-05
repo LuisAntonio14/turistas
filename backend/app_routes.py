@@ -38,7 +38,7 @@ def turistas_santa_cruz():
         turistas = Turista.objects(locacion=locacion.id)
 
         # Crear una lista con los datos de los turistas encontrados
-        turistas_list = [{"id": str(turista.id), "hora": turista.hora} for turista in turistas]
+        turistas_list = [{"id": str(turista.id), "hora": turista.hora, "fecha":turista.fecha} for turista in turistas]
 
         # Responder con la lista de turistas
         return jsonify(turistas_list), 200
