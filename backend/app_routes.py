@@ -4,6 +4,18 @@ from models import Usuario, Locacion, Turista  # Asegúrate de importar Locacion
 # Definir el blueprint para las rutas de la aplicación
 bp = Blueprint('routes', __name__)
 
+@bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    nombre = data.get('nombre')
+    contrasena = data.get('contrasena')
+    user = Usuario.objects(nombre=nombre, contrasena=contrasena).first()
+    if user:
+        return jsonify({'message': 'Login successful'}), 200
+    else:
+        return jsonify({'message': 'Invalid credentials'}), 401
+
+
 # Ruta para registrar un turista
 @bp.route('/registrar_turista', methods=['POST'])
 def registrar_turista():
@@ -11,7 +23,7 @@ def registrar_turista():
     data = request.get_json()
     locacion_id = data.get('locacion_id')  # ID de la locación (ObjectId)
     hora = data.get('hora')  # Hora de la visita
-
+    fecha = data.get('fecha')  # Fecha de la visita
     # Buscar la locación por su ID (ObjectId)
     locacion = Locacion.objects(id=locacion_id).first()
 
@@ -20,7 +32,7 @@ def registrar_turista():
         return jsonify({'message': 'Locación no encontrada'}), 404
     
     # Crear un nuevo turista y asociarlo con la locación encontrada
-    turista = Turista(locacion=locacion, hora=hora)
+    turista = Turista(locacion=locacion, hora=hora, fecha=fecha)
     turista.save()  # Guardar el nuevo turista en la base de datos
 
     # Respuesta de éxito
