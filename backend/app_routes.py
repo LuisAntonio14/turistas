@@ -96,3 +96,23 @@ def turistas_presa():
     else:
         # Si la locación "Presa de Malpaso" no se encuentra, devolver error 404
         return jsonify({'message': 'Locación "La Cueva" no encontrada'}), 404
+    
+
+@bp.route('/turistas/santuario', methods=['GET'])
+def turistas_santuario():
+
+    locacion = Locacion.objects(nombre="Santuario").first()
+
+    # Si se encuentra la locación
+    if locacion:
+        # Obtener todos los turistas asociados con esa locación
+        turistas = Turista.objects(locacion=locacion.id)
+
+        # Crear una lista con los datos de los turistas encontrados
+        turistas_list = [{"id": str(turista.id), "hora": turista.hora, "fecha":turista.fecha} for turista in turistas]
+
+        # Responder con la lista de turistas
+        return jsonify(turistas_list), 200
+    else:
+
+        return jsonify({'message': 'Locación "Santuario" no encontrada'}), 404
