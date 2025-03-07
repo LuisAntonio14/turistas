@@ -62,7 +62,7 @@ def turistas_santa_cruz():
 @bp.route('/turistas/lacueva', methods=['GET'])
 def turistas_lacueva():
     # Buscar la locación con el nombre "Santa Cruz"
-    locacion = Locacion.objects(Nombre="LaCueva").first()
+    locacion = Locacion.objects(nombre="La Cueva").first()
 
     # Si se encuentra la locación
     if locacion:
