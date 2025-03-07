@@ -62,7 +62,7 @@ def turistas_santa_cruz():
 @bp.route('/turistas/lacueva', methods=['GET'])
 def turistas_lacueva():
     # Buscar la locación con el nombre "Santa Cruz"
-    locacion = Locacion.objects(nombre="La Cueva").first()
+    locacion = Locacion.objects(nombre="LaCueva").first()
 
     # Si se encuentra la locación
     if locacion:
@@ -75,5 +75,5 @@ def turistas_lacueva():
         # Responder con la lista de turistas
         return jsonify(turistas_list), 200
     else:
-        # Si la locación "Santa Cruz" no se encuentra, devolver error 404
+        # Si la locación "La cueva" no se encuentra, devolver error 404
         return jsonify({'message': 'Locación "La Cueva" no encontrada'}), 404

@@ -19,10 +19,10 @@ export class LacuevaPage implements OnInit {
   constructor(private router: Router, private http: HttpClient, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.getTuristas();
+    this.getTuristas1();
   }
 
-  getTuristas() {
+  getTuristas1() {
     this.http.get<any[]>('https://turistas.onrender.com/turistas/lacueva') // Cambia la URL por la de tu API
       .subscribe(data => {
         console.log('Datos recibidos de la API:', data); // Verifica la estructura
