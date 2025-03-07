@@ -1,13 +1,65 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-toolbar>
+      <ion-title>Menú de Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <br>
+    <ion-item class="menuboton" button (click)="irAlugares()">Cerrar Sesión</ion-item>
+  </ion-content>
+</ion-menu>
+
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>lacueva</ion-title>
+    <ion-title>Santa Cruz</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<!-- Agregamos el id="main-content" aquí -->
+<ion-content [fullscreen]="true" id="main-content">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">lacueva</ion-title>
+      <ion-title size="large">Registros de Turistas</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Título de la tabla -->
+  <ion-item class="ion-text-center">
+    <ion-label>
+      <strong>Registros de Turistas</strong>
+    </ion-label>
+  </ion-item>
+
+  <!-- Tabla con formato -->
+  <ion-list class="registro-table">
+    <ion-item class="table-header">
+      <ion-label class="column-header">
+        <strong>Número</strong>
+      </ion-label>
+      <ion-label class="column-header">
+        <strong>Hora de Registro</strong>
+      </ion-label>
+      <ion-label class="column-header">
+        <strong>Fecha de Registro</strong>
+      </ion-label>
+    </ion-item>
+
+    <!-- Datos de los turistas -->
+    <ion-item *ngFor="let turista of turistas" class="table-row">
+      <ion-label class="column-data">
+        {{ turista.numero }}
+      </ion-label>
+      <ion-label class="column-data">
+        {{ turista.horaRegistro || 'Sin hora' }}
+      </ion-label>
+      <ion-label class="column-data">
+        {{ turista.fechaRegistro || 'Sin fecha' }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

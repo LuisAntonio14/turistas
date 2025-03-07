@@ -1,25 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonItem, IonButtons, IonMenuButton } from '@ionic/angular/standalone';
-
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonItem, IonButtons, IonMenuButton, IonLabel, IonList } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-cruz',
   templateUrl: './cruz.page.html',
   styleUrls: ['./cruz.page.scss'],
   standalone: true,
-  imports: [IonButtons, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenu, IonMenuButton]
-
+  imports: [IonButtons, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonMenu, IonMenuButton, IonLabel, IonList]
 })
 export class CruzPage implements OnInit {
 
-  constructor(private router: Router) { }
+  turistas: any[] = [];
+
+  constructor(private router: Router, private http: HttpClient, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.getTuristas();
+  }
+
+  getTuristas() {
+    this.http.get<any[]>('https://turistas.onrender.com/turistas/santa_cruz') // Cambia la URL por la de tu API
+      .subscribe(data => {
+        console.log('Datos recibidos de la API:', data); // Verifica la estructura
+        this.turistas = data.map((turista, index) => ({
+          numero: index + 1,
+          horaRegistro: turista.hora,  // Cambié de 'horaRegistro' a 'hora'
+          fechaRegistro: turista.fecha // Cambié de 'fechaRegistro' a 'fecha'
+        }));
+        this.cdRef.detectChanges(); // <-- Fuerza la actualización
+      }, error => {
+        console.error('Error al obtener los turistas', error);
+      });
   }
 
   irAlugares() {
-    this.router.navigate(['lugares']);  
+    this.router.navigate(['lugares']);
   }
 }
