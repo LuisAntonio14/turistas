@@ -7,7 +7,7 @@
       <ion-title>Menú de Opciones</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content class="ion-padding">
     <br>
     <ion-item class="menuboton" button (click)="irAlugares()">Cerrar Sesión</ion-item>
@@ -20,7 +20,6 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Agregamos el id="main-content" aquí -->
 <ion-content [fullscreen]="true" id="main-content">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -28,38 +27,33 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Título de la tabla -->
+  <!-- Refresher para actualizar la lista -->
+  <ion-refresher slot="fixed" (ionRefresh)="getTuristas($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando..."
+    ></ion-refresher-content>
+  </ion-refresher>
+
   <ion-item class="ion-text-center">
     <ion-label>
       <strong>Historial de Registros</strong>
     </ion-label>
   </ion-item>
 
-  <!-- Tabla con formato -->
   <ion-list class="registro-table">
     <ion-item class="table-header">
-      <ion-label class="column-header">
-        <strong>Número</strong>
-      </ion-label>
-      <ion-label class="column-header">
-        <strong>Hora de Registro</strong>
-      </ion-label>
-      <ion-label class="column-header">
-        <strong>Fecha de Registro</strong>
-      </ion-label>
+      <ion-label class="column-header"><strong>Número</strong></ion-label>
+      <ion-label class="column-header"><strong>Hora de Registro</strong></ion-label>
+      <ion-label class="column-header"><strong>Fecha de Registro</strong></ion-label>
     </ion-item>
 
-    <!-- Datos de los turistas -->
     <ion-item *ngFor="let turista of turistas" class="table-row">
-      <ion-label class="column-data">
-        {{ turista.numero }}
-      </ion-label>
-      <ion-label class="column-data">
-        {{ turista.horaRegistro || 'Sin hora' }}
-      </ion-label>
-      <ion-label class="column-data">
-        {{ turista.fechaRegistro || 'Sin fecha' }}
-      </ion-label>
+      <ion-label class="column-data">{{ turista.numero }}</ion-label>
+      <ion-label class="column-data">{{ turista.horaRegistro || 'Sin hora' }}</ion-label>
+      <ion-label class="column-data">{{ turista.fechaRegistro || 'Sin fecha' }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

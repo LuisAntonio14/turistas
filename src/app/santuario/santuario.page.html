@@ -16,11 +16,21 @@
 
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Presa de Malpaso</ion-title>
+    <ion-title>Santuario Virgen de Guadalupe</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <!-- Agregamos el id="main-content" aquí -->
+<ion-content [fullscreen]="true" id="main-content">
+  <ion-refresher slot="fixed" (ionRefresh)="getTuristas2($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando..."
+    ></ion-refresher-content>
+  </ion-refresher>
+
 <ion-content [fullscreen]="true" id="main-content">
   <ion-header collapse="condense">
     <ion-toolbar>
