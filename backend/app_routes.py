@@ -117,6 +117,11 @@ def turistas_santuario():
 
         return jsonify({'message': 'Locación "Santuario" no encontrada'}), 404
 
-@bp.route('/esp32/estado', methods=['GET'])
-def esp32_estado():
-    return jsonify({'message': 'Conexión exitosa con el ESP32'}), 200
+@bp.route('/test', methods=['POST'])
+def test_connection():
+    data = request.get_json()  # Recibir el mensaje en formato JSON
+    mensaje = data.get('mensaje')
+    if mensaje:
+        return jsonify({'message': 'Conexión exitosa', 'received': mensaje}), 200
+    else:
+        return jsonify({'message': 'No se recibió mensaje'}), 400
