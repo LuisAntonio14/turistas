@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models import Usuario, Locacion, Turista  # Asegúrate de importar Locacion y Turista
+from bson import ObjectId
+
 
 # Definir el blueprint para las rutas de la aplicación
 bp = Blueprint('routes', __name__)
@@ -125,3 +127,25 @@ def test_connection():
         return jsonify({'message': 'Conexión exitosa', 'received': mensaje}), 200
     else:
         return jsonify({'message': 'No se recibió mensaje'}), 400
+
+@bp.route('/registrar_rfid', methods=['POST'])
+def registrar_rfid():
+    try:
+        data = request.get_json()
+        uid = data.get('uid')
+        hora = data.get('hora')
+        fecha = data.get('fecha')
+
+        if not uid or not hora or not fecha:
+            return jsonify({'message': 'Datos incompletos'}), 400
+        
+        # ObjectId de la locación (Santa Cruz en este ejemplo)
+        locacion_id = ObjectId('67be9404cf6369185b8ca911')
+
+        # Crear y guardar el nuevo registro
+        nuevo_turista = Turista(locacion=locacion_id, uid=uid, hora=hora, fecha=fecha)
+        nuevo_turista.save()
+
+        return jsonify({'message': 'Registro exitoso'}), 201
+    except Exception as e:
+        return jsonify({'message': 'Error al registrar', 'error': str(e)}), 500

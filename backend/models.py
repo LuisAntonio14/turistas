@@ -1,5 +1,6 @@
 from flask_mongoengine import MongoEngine
 from datetime import datetime
+from mongoengine import Document, StringField, ReferenceField
 
 # Inicializar la instancia de MongoEngine
 db = MongoEngine()
@@ -19,3 +20,9 @@ class Turista(db.Document):
     locacion = db.ReferenceField('Locacion', required=True)  # Referencia a la locación que visitó (Relación con el modelo Locacion)
     fecha = db.DateTimeField(default=datetime.utcnow)  # Fecha de la visita (se establece a la hora actual por defecto)
     hora = db.StringField(required=True)  # Hora en la que el turista visitó la locación
+
+class Turista(Document):
+    locacion = ReferenceField('Locacion', required=True)
+    uid = StringField(required=True)  # Agregar el UID del RFID
+    hora = StringField(required=True)
+    fecha = StringField(required=True)
