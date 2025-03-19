@@ -139,9 +139,14 @@ def registrar_rfid():
         if not uid or not hora or not fecha:
             return jsonify({'message': 'Datos incompletos'}), 400
         
-        # ObjectId de la locación (Santa Cruz en este ejemplo)
+        # ObjectId de la locación (Santa Cruz en este caso)
         locacion_id = ObjectId('67be9404cf6369185b8ca911')
 
+        # Verificar si la locación existe
+        locacion = Locacion.objects(id=locacion_id).first()
+        if not locacion:
+            return jsonify({'message': 'Locación no encontrada'}), 404
+        
         # Crear y guardar el nuevo registro
         nuevo_turista = Turista(locacion=locacion_id, uid=uid, hora=hora, fecha=fecha)
         nuevo_turista.save()
@@ -149,3 +154,4 @@ def registrar_rfid():
         return jsonify({'message': 'Registro exitoso'}), 201
     except Exception as e:
         return jsonify({'message': 'Error al registrar', 'error': str(e)}), 500
+
