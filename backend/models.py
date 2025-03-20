@@ -17,5 +17,5 @@ class Locacion(db.Document):
 # Modelo para el Turista (Para gestionar la información de los turistas)
 class Turista(db.Document):
     locacion = db.ReferenceField('Locacion', required=True)  # Referencia a la locación que visitó (Relación con el modelo Locacion)
-    fecha = db.DateTimeField(default=datetime.utcnow)  # Fecha de la visita (se establece a la hora actual por defecto)
+    fecha = db.StringField(required=True)
     hora = db.StringField(required=True)  # Hora en la que el turista visitó la locación
