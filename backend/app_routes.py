@@ -130,3 +130,20 @@ def test_connection():
         return jsonify({'message': 'Conexión exitosa', 'received': mensaje}), 200
     else:
         return jsonify({'message': 'No se recibió mensaje'}), 400
+
+
+@bp.route('/turistas/filtrar_fecha', methods=['GET'])
+def filtrar_por_fecha():
+    fecha = request.args.get('fecha')  # Captura la fecha enviada por el frontend
+
+    if not fecha:
+        return jsonify({'message': 'Fecha no proporcionada'}), 400
+
+    try:
+        # Busca turistas que coincidan con la fecha seleccionada
+        turistas = Turista.objects(fecha=fecha)
+        turistas_list = [{"id": str(turista.id), "hora": turista.hora, "fecha": turista.fecha} for turista in turistas]
+
+        return jsonify(turistas_list), 200
+    except Exception as e:
+        return jsonify({'message': 'Error al filtrar turistas', 'error': str(e)}), 500

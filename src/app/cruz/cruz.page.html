@@ -27,6 +27,21 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Botón para mostrar el selector de fecha -->
+  <ion-item>
+    <ion-button (click)="toggleDateTime()">Buscar por fecha</ion-button>
+  </ion-item>
+
+  <!-- Selector de fecha y botón de búsqueda -->
+  <div *ngIf="showDateTime">
+    <ion-item>
+      <ion-datetime [presentation]="'month-year'" [(ngModel)]="selectedDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="fetchRecordsByDate()">Buscar registros</ion-button>
+    </ion-item>
+  </div>
+
   <!-- Refresher para actualizar la lista -->
   <ion-refresher slot="fixed" (ionRefresh)="getTuristas($event)">
     <ion-refresher-content

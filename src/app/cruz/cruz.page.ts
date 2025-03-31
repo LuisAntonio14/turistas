@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
   IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonItem, IonButtons, 
-  IonMenuButton, IonLabel, IonList, IonRefresher, IonRefresherContent 
+  IonMenuButton, IonLabel, IonList, IonRefresher, IonRefresherContent, IonDatetime, IonButton
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-cruz',
@@ -14,19 +15,55 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./cruz.page.scss'],
   standalone: true,
   imports: [
-    IonButtons, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, 
+    IonButtons, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, 
     CommonModule, FormsModule, IonMenu, IonMenuButton, IonLabel, IonList, 
-    IonRefresher, IonRefresherContent
-  ]
+    IonRefresher, IonRefresherContent, IonDatetime
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CruzPage implements OnInit {
   turistas: any[] = [];
+  showDateTime = false; // Controla la visibilidad del selector de fecha y el botón de búsqueda
+  selectedDate: string = ''; // Fecha seleccionada por el usuario
 
   constructor(private router: Router, private http: HttpClient, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getTuristas();
   }
+
+  toggleDateTime() {
+    this.showDateTime = !this.showDateTime; // Alterna entre mostrar y ocultar el selector de fecha
+  }
+
+  fetchRecordsByDate() {
+    if (!this.selectedDate) {
+      console.error('No se ha seleccionado una fecha');
+      return;
+    }
+  
+    // Convertir la fecha seleccionada al formato "YYYY-MM-DD"
+    const formattedDate = new Date(this.selectedDate).toISOString().split('T')[0]; // Extrae solo la parte de la fecha
+    console.log('Fecha seleccionada y formateada:', formattedDate);
+  
+    this.http
+      .get<any[]>(`https://turistas.onrender.com/turistas/filtrar_fecha?fecha=${formattedDate}`)
+      .subscribe(
+        (data) => {
+          console.log('Datos filtrados:', data);
+          this.turistas = data.map((turista, index) => ({
+            numero: index + 1,
+            horaRegistro: turista.hora,
+            fechaRegistro: turista.fecha,
+          }));
+          this.cdRef.detectChanges();
+        },
+        (error) => {
+          console.error('Error al filtrar turistas por fecha', error);
+        }
+      );
+  }
+  
 
   getTuristas(event?: CustomEvent) {
     this.http.get<any[]>('https://turistas.onrender.com/turistas/santa_cruz')
