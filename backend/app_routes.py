@@ -134,14 +134,14 @@ def test_connection():
 
 @bp.route('/turistas/filtrar_fecha', methods=['GET'])
 def filtrar_por_fecha():
-    fecha = request.args.get('fecha')  # Captura la fecha enviada por el frontend
+    fecha = request.args.get('fecha')  # Se espera un valor tipo "YYYY-MM"
 
     if not fecha:
         return jsonify({'message': 'Fecha no proporcionada'}), 400
 
-    try:
-        # Busca turistas que coincidan con la fecha seleccionada
-        turistas = Turista.objects(fecha=fecha)
+    try:  
+        # Busca turistas cuya fecha comience con el string "YYYY-MM"
+        turistas = Turista.objects(fecha__startswith=fecha)
         turistas_list = [{"id": str(turista.id), "hora": turista.hora, "fecha": turista.fecha} for turista in turistas]
 
         return jsonify(turistas_list), 200

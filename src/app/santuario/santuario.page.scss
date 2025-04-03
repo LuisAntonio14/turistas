@@ -1,0 +1,91 @@
+body {
+    --background-color: #ffffff; /* Fondo completamente blanco */
+    background-color: #ffffff !important; /* Asegura fondo blanco en todo */
+  }
+  
+  ion-content {
+    --ion-background-color: #ffffff; /* Fondo blanco del contenido */
+    background-color: #ffffff !important; /* Asegura consistencia */
+  }
+  
+  ion-header {
+    --background: #ffffff; /* Fondo blanco */
+    background-color: #ffffff !important; /* Forzar fondo blanco */
+  }
+  
+  ion-toolbar {
+    --background: #041e68; /* Fondo azul oscuro de la barra */
+    background-color: #041e68 !important;
+    color: #ffffff; /* Texto en blanco */
+  }
+  
+  ion-title {
+    text-align: center; /* Centra el título */
+    font-size: 20px; /* Ajusta tamaño */
+  }
+  
+  .menuboton {
+    --background: #bf0b5b; /* Fondo del botón */
+    background-color: #bf0b5b !important; /* Botón rosa */
+    color: #ffffff; /* Texto en blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    text-align: center; /* Centra el texto */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  .registro-table {
+    --background-color: #f5f5f5 !important;
+    --background: #ffffff !important; /* Fondo gris claro para la tabla */
+    border-radius: 25px; /* Bordes redondeados */
+    margin: 5%; /* Espaciado alrededor de la tabla */
+  }
+  
+  .table-header {
+      --background: #dfdfdf; /* Fondo blanco */
+      background-color: #dfdfdf!important; /* Forzar fondo blanco */
+    color: #bf0b5b; /* Texto en blanco */
+    font-weight: bold; /* Encabezados resaltados */
+  }
+  
+  .table-row {
+      --background: #dfdfdf; /* Fondo blanco */
+      background-color: #dfdfdf!important; /* Forzar fondo blanco */
+    color: #041e68; /* Texto en negro */
+  }
+  
+  .column-header,
+  .column-data {
+    text-align: center; /* Centra el texto */
+  }
+  
+  ion-refresher-content {
+    --background: #041e68; /* Fondo azul oscuro para refresher */
+    color: #ffffff; /* Texto en blanco */
+  }
+  
+  ion-list {
+      --background: #dfdfdf; /* Fondo blanco */
+      background-color: #dfdfdf!important; /* Forzar fondo blanco */
+    }
+  
+  .botonbuscar{
+      --background: #ffffff; /* Fondo blanco */
+      background-color: #dfdfdf!important;
+  }
+  
+  
+  
+  .custom-text-center{
+      --background: #ffffff; /* Fondo blanco */
+      background-color: #ffffff!important;
+      color: #edce5a;
+      text-align: center;
+      font-size: 25px;
+  }
+  
+  ion-button{
+      --background: #bf0b5b;
+      color: white;
+      
+  
+  }

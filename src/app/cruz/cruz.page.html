@@ -28,18 +28,18 @@
   </ion-header>
 
   <!-- Botón para mostrar el selector de fecha -->
-  <ion-item>
+  <ion-item class="botonbuscar">
     <ion-button (click)="toggleDateTime()">Buscar por fecha</ion-button>
   </ion-item>
 
   <!-- Selector de fecha y botón de búsqueda -->
   <div *ngIf="showDateTime">
-    <ion-item>
+    <ion-label>
       <ion-datetime [presentation]="'month-year'" [(ngModel)]="selectedDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
+    </ion-label>
+    <ion-label>
       <ion-button (click)="fetchRecordsByDate()">Buscar registros</ion-button>
-    </ion-item>
+    </ion-label>
   </div>
 
   <!-- Refresher para actualizar la lista -->
@@ -52,11 +52,12 @@
     ></ion-refresher-content>
   </ion-refresher>
 
-  <ion-item class="ion-text-center">
-    <ion-label>
+  <div class="custom-text-center">
+    <ion-label class="titulo">
       <strong>Historial de Registros</strong>
     </ion-label>
-  </ion-item>
+  </div>
+  
 
   <ion-list class="registro-table">
     <ion-item class="table-header">

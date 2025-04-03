@@ -63,15 +63,17 @@ ion-content {
 }
 
 .menuboton {
-  --background: transparent;
-  --border-width: 0;
-  --padding-start: 0;
-  --padding-end: 0;
-  --inner-padding: 0;
-  --min-height: 0;
-  --ion-item-background: transparent;
-  --ion-item-border-color: transparent;
-  --ion-item-border-width: 0;
-  --ion-item-padding: 0;
-  --ion-item-margin: 0;
+  text-align: center;
+  --background: #bf0b5b;
+  border-radius: 10px !important; 
+}
+
+ion-header {
+  --background: #ffffff; /* Fondo blanco */
+  background-color: #ffffff !important; /* Aplica un fondo blanco directamente */
+}
+
+ion-toolbar {
+  --background: #041e68; /* Fondo blanco para la barra */
+  background-color: #041e68 !important;
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
   IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonItem, IonButtons, 
-  IonMenuButton, IonLabel, IonList, IonRefresher, IonRefresherContent, IonDatetime, IonButton
+  IonMenuButton, IonLabel, IonList, IonRefresher, IonRefresherContent, IonDatetime, IonButton 
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -42,9 +42,12 @@ export class CruzPage implements OnInit {
       return;
     }
   
-    // Convertir la fecha seleccionada al formato "YYYY-MM-DD"
-    const formattedDate = new Date(this.selectedDate).toISOString().split('T')[0]; // Extrae solo la parte de la fecha
-    console.log('Fecha seleccionada y formateada:', formattedDate);
+    // Convertir la fecha seleccionada a ISO y extraer "YYYY-MM"
+    const formattedDate = new Date(this.selectedDate)
+      .toISOString()
+      .split('T')[0]
+      .slice(0, 7); // Extrae "YYYY-MM"
+    console.log('Fecha seleccionada y formateada (YYYY-MM):', formattedDate);
   
     this.http
       .get<any[]>(`https://turistas.onrender.com/turistas/filtrar_fecha?fecha=${formattedDate}`)
@@ -63,7 +66,6 @@ export class CruzPage implements OnInit {
         }
       );
   }
-  
 
   getTuristas(event?: CustomEvent) {
     this.http.get<any[]>('https://turistas.onrender.com/turistas/santa_cruz')
