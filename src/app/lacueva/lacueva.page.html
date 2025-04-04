@@ -20,15 +20,30 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Refresher para actualizar la lista de turistas -->
 <ion-content [fullscreen]="true" id="main-content">
-  <ion-refresher slot="fixed" (ionRefresh)="getTuristas1($event)">
+  <!-- Botón para mostrar el selector de fecha -->
+  <ion-item class="botonbuscar">
+    <ion-button (click)="toggleDateTime()">Buscar por fecha</ion-button>
+  </ion-item>
+
+  <!-- Selector de fecha con scroll de mes y año y botón de búsqueda -->
+  <div *ngIf="showDateTime" class="ion-padding">
+    <ion-label>
+      <ion-datetime [presentation]="'month-year'" [(ngModel)]="selectedDate"></ion-datetime>
+    </ion-label>
+    <ion-label>
+      <ion-button (click)="fetchRecordsByDate()">Buscar registros</ion-button>
+    </ion-label>
+  </div>
+
+  <!-- Refresher para actualizar la lista -->
+  <ion-refresher slot="fixed" (ionRefresh)="getTuristas($event)">
     <ion-refresher-content
       pullingIcon="chevron-down-circle-outline"
       pullingText="Desliza para actualizar"
       refreshingSpinner="circles"
-      refreshingText="Actualizando..."
-    ></ion-refresher-content>
+      refreshingText="Actualizando...">
+    </ion-refresher-content>
   </ion-refresher>
 
   <ion-header collapse="condense">
@@ -47,28 +62,15 @@
   <!-- Tabla con formato -->
   <ion-list class="registro-table">
     <ion-item class="table-header">
-      <ion-label class="column-header">
-        <strong>Número</strong>
-      </ion-label>
-      <ion-label class="column-header">
-        <strong>Hora de Registro</strong>
-      </ion-label>
-      <ion-label class="column-header">
-        <strong>Fecha de Registro</strong>
-      </ion-label>
+      <ion-label class="column-header"><strong>Número</strong></ion-label>
+      <ion-label class="column-header"><strong>Hora de Registro</strong></ion-label>
+      <ion-label class="column-header"><strong>Fecha de Registro</strong></ion-label>
     </ion-item>
 
-    <!-- Datos de los turistas -->
     <ion-item *ngFor="let turista of turistas" class="table-row">
-      <ion-label class="column-data">
-        {{ turista.numero }}
-      </ion-label>
-      <ion-label class="column-data">
-        {{ turista.horaRegistro || 'Sin hora' }}
-      </ion-label>
-      <ion-label class="column-data">
-        {{ turista.fechaRegistro || 'Sin fecha' }}
-      </ion-label>
+      <ion-label class="column-data">{{ turista.numero }}</ion-label>
+      <ion-label class="column-data">{{ turista.horaRegistro || 'Sin hora' }}</ion-label>
+      <ion-label class="column-data">{{ turista.fechaRegistro || 'Sin fecha' }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonItem, IonButtons, 
-  IonMenuButton, IonLabel, IonList, IonRefresher, IonRefresherContent 
+import {
+  IonContent, IonHeader, IonTitle, IonToolbar, IonMenu, IonItem, IonButtons,
+  IonMenuButton, IonLabel, IonList, IonRefresher, IonRefresherContent, IonDatetime, IonButton
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-lacueva',
@@ -14,21 +15,61 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./lacueva.page.scss'],
   standalone: true,
   imports: [
-    IonButtons, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, 
-    CommonModule, FormsModule, IonMenu, IonMenuButton, IonLabel, IonList, 
-    IonRefresher, IonRefresherContent
-  ]
+    IonButtons, IonButton, IonItem, IonContent, IonHeader, IonTitle, IonToolbar,
+    CommonModule, FormsModule, IonMenu, IonMenuButton, IonLabel, IonList,
+    IonRefresher, IonRefresherContent, IonDatetime
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LacuevaPage implements OnInit {
   turistas: any[] = [];
+  showDateTime = false;
+  selectedDate: string = '';
 
   constructor(private router: Router, private http: HttpClient, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.getTuristas1();
+    this.getTuristas();
   }
 
-  getTuristas1(event?: CustomEvent) {
+  toggleDateTime() {
+    this.showDateTime = !this.showDateTime;
+  }
+
+  // Función para buscar registros filtrados por mes y año en La Cueva
+  fetchRecordsByDate() {
+    if (!this.selectedDate) {
+      console.error('No se ha seleccionado una fecha');
+      return;
+    }
+    // Extrae "YYYY-MM" de la fecha seleccionada
+    const formattedDate = new Date(this.selectedDate)
+      .toISOString()
+      .split('T')[0]
+      .slice(0, 7);
+    console.log('Fecha seleccionada y formateada (YYYY-MM):', formattedDate);
+
+    // Se asume que existe un endpoint para filtrar La Cueva
+    this.http
+      .get<any[]>(`https://turistas.onrender.com/turistas/filtrar_fecha_lacueva?fecha=${formattedDate}`)
+      .subscribe(
+        (data) => {
+          console.log('Datos filtrados:', data);
+          this.turistas = data.map((turista, index) => ({
+            numero: index + 1,
+            horaRegistro: turista.hora,
+            fechaRegistro: turista.fecha,
+          }));
+          this.cdRef.detectChanges();
+        },
+        (error) => {
+          console.error('Error al filtrar turistas por fecha', error);
+        }
+      );
+  }
+
+  // Función para obtener todos los registros de La Cueva
+  getTuristas(event?: CustomEvent) {
     this.http.get<any[]>('https://turistas.onrender.com/turistas/lacueva')
       .subscribe(data => {
         console.log('Datos recibidos de la API:', data);
