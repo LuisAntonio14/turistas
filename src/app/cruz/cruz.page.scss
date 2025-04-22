@@ -59,8 +59,14 @@ ion-title {
 }
 
 ion-refresher-content {
-  --background: #041e68; /* Fondo azul oscuro para refresher */
-  color: #ffffff; /* Texto en blanco */
+  --background: transparent; /* No cambies el fondo del refresher */
+  --color: #041e68; /* Azul oscuro para el texto e íconos */
+  color: #041e68;
+  text-align: center;
+}
+
+ion-refresher {
+  z-index: 10; /* Asegura que se muestre encima si hay overlays */
 }
 
 ion-list {
@@ -90,6 +96,48 @@ ion-button{
 
 }
 
-.titulo{
-  padding: 20px;
+/* Selector de fecha - estilo minimalista */
+.date-card {
+margin: 20px auto;
+padding: 16px;
+max-width: 350px;
+border-radius: 12px;
+background-color: #dfdfdf; /* Gris claro */
+border: 1px solid #ccc; /* Línea sutil */
+}
+
+.date-card-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 12px;
+}
+
+.date-label {
+font-size: 16px;
+font-weight: 500;
+color: #041e68; /* Azul oscuro */
+text-align: center;
+}
+
+ion-datetime.date-picker {
+--background: #ffffff;
+border: 1px solid #bf0b5b; /* Borde rosa */
+border-radius: 10px;
+padding: 6px;
+width: 100%;
+max-width: 280px;
+font-size: 14px;
+color: #041e68; /* Azul oscuro */
+background-color: #ffffff;
+}
+
+.buscar-fecha-button {
+--background: #bf0b5b; /* Fondo rosa */
+--color: white;
+width: 100%;
+max-width: 200px;
+font-size: 14px;
+font-weight: 500;
+border-radius: 8px;
 }

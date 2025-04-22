@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonCol, IonButton, IonImg, IonCard, IonMenu, IonMenuButton, IonButtons, IonList, IonItem } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonCol, IonButton, IonImg, IonCard, IonMenu, IonMenuButton, IonButtons, IonList, IonItem, NavController } from '@ionic/angular/standalone'; // Importa NavController
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,28 +13,28 @@ import { Router } from '@angular/router';
 })
 export class LugaresPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private navController: NavController) { }  // Cambia Router por NavController
 
   ngOnInit() {
   }
 
   irACruz() {
-    this.router.navigate(['cruz']);  
+    this.navController.navigateForward('/cruz');  // Usa navigateForward para navegación hacia adelante
   }
   
   irAlacueva() {
-    this.router.navigate(['lacueva']);  
+    this.navController.navigateForward('/lacueva');  // Usa navigateForward para navegación hacia adelante
   }
 
   irApresa() {
-    this.router.navigate(['presa']);  
+    this.navController.navigateForward('/presa');  // Usa navigateForward para navegación hacia adelante
   }
 
   irAsantuario() {
-    this.router.navigate(['santuario']);  
+    this.navController.navigateForward('/santuario');  // Usa navigateForward para navegación hacia adelante
   }
 
   irAlogin() {
-    this.router.navigate(['login']);  
+    this.navController.navigateRoot('/login');  // Usa navigateRoot si deseas redirigir al login y reiniciar el historial
   }
 }

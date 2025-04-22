@@ -9,13 +9,17 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <br>
+    <br />
     <ion-item class="menuboton" button (click)="irAlugares()">Cerrar Sesión</ion-item>
   </ion-content>
 </ion-menu>
 
+<!-- Header con Back Button para regresar a "lugares" -->
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lugares"></ion-back-button>
+    </ion-buttons>
     <ion-title>Santa Cruz</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -29,18 +33,24 @@
 
   <!-- Botón para mostrar el selector de fecha -->
   <ion-item class="botonbuscar">
-    <ion-button (click)="toggleDateTime()">Buscar por fecha</ion-button>
+    <ion-button expand="block" (click)="toggleDateTime()">Buscar por fecha</ion-button>
   </ion-item>
 
   <!-- Selector de fecha y botón de búsqueda -->
-  <div *ngIf="showDateTime">
-    <ion-label>
-      <ion-datetime [presentation]="'month-year'" [(ngModel)]="selectedDate"></ion-datetime>
-    </ion-label>
-    <ion-label>
-      <ion-button (click)="fetchRecordsByDate()">Buscar registros</ion-button>
-    </ion-label>
-  </div>
+  <ion-card *ngIf="showDateTime" class="date-card">
+    <ion-card-content class="date-card-content">
+      <ion-label class="date-label">Selecciona una fecha:</ion-label>
+      <ion-datetime
+        class="date-picker"
+        [presentation]="'month-year'"
+        [(ngModel)]="selectedDate"
+        color="primary"
+      ></ion-datetime>
+      <ion-button expand="block" class="buscar-fecha" (click)="fetchRecordsByDate()">
+        Buscar registros
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
   <!-- Refresher para actualizar la lista -->
   <ion-refresher slot="fixed" (ionRefresh)="getTuristas($event)">
@@ -48,8 +58,8 @@
       pullingIcon="chevron-down-circle-outline"
       pullingText="Desliza para actualizar"
       refreshingSpinner="circles"
-      refreshingText="Actualizando..."
-    ></ion-refresher-content>
+    >
+    </ion-refresher-content>
   </ion-refresher>
 
   <div class="custom-text-center">
@@ -57,7 +67,6 @@
       <strong>Historial de Registros</strong>
     </ion-label>
   </div>
-  
 
   <ion-list class="registro-table">
     <ion-item class="table-header">

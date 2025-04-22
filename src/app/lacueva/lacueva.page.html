@@ -26,15 +26,20 @@
     <ion-button (click)="toggleDateTime()">Buscar por fecha</ion-button>
   </ion-item>
 
-  <!-- Selector de fecha con scroll de mes y año y botón de búsqueda -->
-  <div *ngIf="showDateTime" class="ion-padding">
-    <ion-label>
-      <ion-datetime [presentation]="'month-year'" [(ngModel)]="selectedDate"></ion-datetime>
-    </ion-label>
-    <ion-label>
-      <ion-button (click)="fetchRecordsByDate()">Buscar registros</ion-button>
-    </ion-label>
+  <!-- Selector de fecha con estilo minimalista -->
+<div *ngIf="showDateTime" class="date-card">
+  <div class="date-card-content">
+    <label class="date-label">Selecciona mes y año</label>
+    <ion-datetime
+      class="date-picker"
+      [presentation]="'month-year'"
+      [(ngModel)]="selectedDate">
+    </ion-datetime>
+    <ion-button class="buscar-fecha-button" (click)="fetchRecordsByDate()">
+      Buscar registros
+    </ion-button>
   </div>
+</div>
 
   <!-- Refresher para actualizar la lista -->
   <ion-refresher slot="fixed" (ionRefresh)="getTuristas($event)">
@@ -42,7 +47,7 @@
       pullingIcon="chevron-down-circle-outline"
       pullingText="Desliza para actualizar"
       refreshingSpinner="circles"
-      refreshingText="Actualizando...">
+>
     </ion-refresher-content>
   </ion-refresher>
 
